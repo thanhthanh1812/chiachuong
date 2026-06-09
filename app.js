@@ -228,6 +228,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Helper: Limit text to a maximum number of words while preserving original structure (line endings)
+    const limitWords = (text, maxWords) => {
+        const words = text.trim().split(/\s+/);
+        if (words.length <= maxWords) {
+            return {
+                text: text,
+                isCut: false,
+                totalWords: words.length
+            };
+        }
+        
+        let wordCount = 0;
+        let cutIndex = 0;
+        const regex = /\s+/g;
+        let match;
+        
+        const startOffset = text.search(/\S/);
+        let lastIndex = startOffset >= 0 ? startOffset : 0;
+        
+        while ((match = regex.exec(text)) !== null) {
+            wordCount++;
+            if (wordCount >= maxWords) {
+                cutIndex = match.index;
+                break;
+            }
+            lastIndex = regex.lastIndex;
+        }
+        
+        if (wordCount < maxWords) {
+            return {
+                text: text,
+                isCut: false,
+                totalWords: words.length
+            };
+        }
+        
+        return {
+            text: text.substring(0, cutIndex),
+            isCut: true,
+            totalWords: words.length
+        };
+    };
+
     // Algorithm 2: Split chapters by Word count boundary at paragraph endings
     const splitByParagraph = (rawText) => {
         const lines = rawText.split(/\r?\n/);
@@ -273,16 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentChapterLines = [];
                 currentWordCount = 0;
                 currentChapterIndex++;
-                
-                // Hard limit to 10 chapters max for browser performance and user rules
-                if (chapters.length >= 10) {
-                    break;
-                }
             }
         }
         
         // Save leftover lines as the last chapter
-        if (currentChapterLines.length > 0 && chapters.length < 10) {
+        if (currentChapterLines.length > 0) {
             const content = currentChapterLines.join('\n').trim();
             if (content !== '') {
                 const title = generateChapterTitle(chapterPrefix, chapterStartNum + currentChapterIndex);
@@ -306,11 +344,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Apply 50,000 words limit
+        const limitResult = limitWords(rawText, 50000);
+        const processedText = limitResult.text;
+
+        if (limitResult.isCut) {
+            warningMessage.textContent = `Văn bản nhập vào quá dài (${limitResult.totalWords.toLocaleString('vi-VN')} từ). Hệ thống tự động cắt ngắn và chỉ xử lý 50.000 từ đầu tiên để bảo vệ hiệu năng.`;
+            warningBox.classList.remove('hidden');
+        } else {
+            warningBox.classList.add('hidden');
+        }
+
         let chapters = [];
         if (activeTab === 'title') {
-            chapters = splitByTitle(rawText);
+            chapters = splitByTitle(processedText);
         } else {
-            chapters = splitByParagraph(rawText);
+            chapters = splitByParagraph(processedText);
         }
 
         processedChapters = chapters;
@@ -324,16 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
             detectedStatsEl.textContent = '0 chương được tìm thấy';
             showToast('Không tìm thấy chương nào khớp với cấu hình!', 'fa-circle-xclamation');
             return;
-        }
-
-        // Limit checking (only apply the 10-chapter limit for paragraph-based splitting)
-        const totalDetected = processedChapters.length;
-        if (activeTab === 'paragraph' && totalDetected > 10) {
-            processedChapters = processedChapters.slice(0, 10);
-            warningMessage.textContent = `Đã tìm thấy ${totalDetected} chương. Hệ thống chỉ lấy tối đa 10 chương đầu tiên.`;
-            warningBox.classList.remove('hidden');
-        } else {
-            warningBox.classList.add('hidden');
         }
 
         detectedStatsEl.textContent = `${processedChapters.length} chương đã sẵn sàng`;
