@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StorySplitter - Công cụ chia chương truyện trực tuyến chuyên nghiệp</title>
+    <meta name="description" content="Công cụ trực tuyến giúp chia nhỏ văn bản truyện thô thành các chương riêng biệt một cách nhanh chóng, hỗ trợ tải về file ZIP và sao chép nhanh chóng. Chạy hoàn toàn trên trình duyệt của bạn.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- JSZip Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+    <!-- Main Script -->
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="glowing-orb orb-1"></div>
+    <div class="glowing-orb orb-2"></div>
+
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo-area">
+                <i class="fa-solid fa-book-open-reader logo-icon"></i>
+                <div>
+                    <h1>StorySplitter</h1>
+                    <p class="subtitle">Trình chia chương truyện thông minh & nhanh chóng</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge badge-client"><i class="fa-solid fa-shield-halved"></i> Không cần Backend</span>
+                <span class="badge badge-limit"><i class="fa-solid fa-circle-exclamation"></i> Tối đa 10 chương</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace-grid">
+            <!-- Left Panel: Input & Config -->
+            <section class="panel panel-input glass-effect">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-file-import icon-blue"></i> Nhập nội dung truyện</h2>
+                    <span id="input-stats" class="text-stats">0 từ | 0 ký tự</span>
+                </div>
+                <div class="panel-body">
+                    <div class="textarea-wrapper">
+                        <textarea id="raw-text" placeholder="Nhập hoặc dán văn bản truyện thô ở đây...
+
+Ví dụ:
+Chương 5: Trời mưa
+
+Nội dung chương 5...
+
+Chương 6: Trời nắng
+
+Nội dung chương 6..."></textarea>
+                        <button id="clear-btn" class="btn-icon-only" title="Xóa nội dung"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+
+                    <!-- Tabs Navigation -->
+                    <div class="tabs-navigation">
+                        <button type="button" class="tab-btn active" id="tab-title-btn" data-tab="title"><i class="fa-solid fa-heading"></i> Theo Tên Chương</button>
+                        <button type="button" class="tab-btn" id="tab-paragraph-btn" data-tab="paragraph"><i class="fa-solid fa-paragraph"></i> Theo Đoạn & Số Từ</button>
+                    </div>
+
+                    <!-- Config Split by Title (Tab Content 1) -->
+                    <div class="config-box tab-content" id="config-title-content">
+                        <h3><i class="fa-solid fa-sliders"></i> Cấu hình nhận diện tên chương</h3>
+                        <div class="config-grid">
+                            <div class="config-group">
+                                <label for="split-pattern">Quy tắc nhận dạng (Regex):</label>
+                                <div class="select-wrapper">
+                                    <select id="split-pattern">
+                                        <option value="auto">Tự động phát hiện (Khuyên dùng)</option>
+                                        <option value="standard">Chương / CHƯƠNG / Quyển [Số]</option>
+                                        <option value="custom">Tự tùy chỉnh bằng Regex</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="config-group hidden" id="custom-regex-group">
+                                <label for="custom-regex">Regex tùy chỉnh:</label>
+                                <input type="text" id="custom-regex" value="^(Chương|CHƯƠNG|Quyển)\s+\d+.*$" placeholder="Regex nhận diện dòng tiêu đề">
+                            </div>
+                            <div class="config-group">
+                                <label for="limit-chapters">Số chương giới hạn tối đa:</label>
+                                <input type="number" id="limit-chapters" value="10" min="1" max="10" readonly class="input-readonly">
+                                <small class="input-tip">Hệ thống chỉ hỗ trợ tách tối đa 10 chương.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Config Split by Paragraphs (Tab Content 2) -->
+                    <div class="config-box tab-content hidden" id="config-paragraph-content">
+                        <h3><i class="fa-solid fa-sliders"></i> Cấu hình tự động chia theo đoạn</h3>
+                        <div class="info-note">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>Tính năng này tự động chia truyện thành các chương nhỏ bằng cách gom các đoạn văn để không bị cắt vụn chữ. <strong>Hãy xuống dòng thường xuyên để số từ các chương đồng đều hơn.</strong></p>
+                        </div>
+                        <div class="video-guide-area">
+                            <button type="button" id="video-guide-btn" class="btn btn-secondary btn-block btn-sm">
+                                <i class="fa-solid fa-video"></i> Video hướng dẫn sử dụng nhanh
+                            </button>
+                        </div>
+                        <div class="config-grid">
+                            <div class="config-group">
+                                <label for="words-per-chapter">Số từ định mức trong 1 chương:</label>
+                                <input type="number" id="words-per-chapter" value="2000" min="100" step="100">
+                            </div>
+                            <div class="config-group">
+                                <label for="chapter-prefix">Tiền tố chương (Ví dụ: Thế giới 1):</label>
+                                <input type="text" id="chapter-prefix" value="Thế giới 1 - Chương " placeholder="Ví dụ: Thế giới 1 - Chương ">
+                            </div>
+                            <div class="config-group">
+                                <label for="chapter-start-num">Số thứ tự bắt đầu:</label>
+                                <input type="number" id="chapter-start-num" value="1" min="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="split-btn" class="btn btn-primary btn-block">
+                        <span class="btn-text">Bắt đầu tách chương</span>
+                        <i class="fa-solid fa-wand-magic-sparkles btn-icon"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results -->
+            <section class="panel panel-output glass-effect">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-square-poll-horizontal icon-purple"></i> Kết quả đã phân tách</h2>
+                    <span id="detected-stats" class="text-stats">0 chương được tìm thấy</span>
+                </div>
+                
+                <div class="panel-body flex-column-layout">
+                    <!-- Warning message if exceeding limits or no chapters -->
+                    <div id="warning-box" class="warning-box hidden">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span id="warning-message">Đã tìm thấy nhiều hơn 10 chương. Hệ thống chỉ lấy 10 chương đầu tiên.</span>
+                    </div>
+
+                    <!-- Placeholder when empty -->
+                    <div id="empty-state" class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fa-solid fa-bezier-curve"></i>
+                        </div>
+                        <h3>Chưa có chương nào được chia</h3>
+                        <p>Hãy dán văn bản truyện ở ô bên trái và bấm nút "Bắt đầu tách chương" để xem kết quả tại đây.</p>
+                    </div>
+
+                    <!-- Chapters Output Area -->
+                    <div id="chapters-list" class="chapters-list hidden">
+                        <!-- Chapter cards will be generated here by Javascript -->
+                    </div>
+
+                    <!-- Bulk Actions Footer -->
+                    <div id="bulk-actions" class="bulk-actions hidden">
+                        <button id="copy-all-btn" class="btn btn-secondary">
+                            <i class="fa-solid fa-copy"></i> Copy tất cả
+                        </button>
+                        <button id="download-zip-btn" class="btn btn-success">
+                            <i class="fa-solid fa-file-zipper"></i> Tải file .ZIP các chương
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 StorySplitter. Công cụ chạy 100% Client-side. Dữ liệu của bạn được bảo mật tuyệt đối.</p>
+        </footer>
+    </div>
+
+    <!-- Chapter Preview Modal -->
+    <div id="preview-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3 id="modal-chapter-title">Xem trước tiêu đề chương</h3>
+                <button id="close-modal-btn" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="modal-chapter-content">Nội dung chi tiết chương...</pre>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-copy-btn" class="btn btn-secondary"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                <button id="modal-download-btn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải .txt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Edit Popup Modal (Large Overlay) -->
+    <div id="bulk-edit-modal" class="modal-overlay modal-fullscreen hidden">
+        <div class="modal-content modal-content-large glass-effect">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa & Sao chép hàng loạt</h3>
+                    <span id="bulk-edit-stats" class="text-stats">0 chương đã tách</span>
+                </div>
+                <button id="close-bulk-edit-btn" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="bulk-edit-list" class="bulk-edit-list">
+                    <!-- Chapter editing fields will be generated dynamically here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="bulk-edit-copy-btn" class="btn btn-secondary"><i class="fa-solid fa-copy"></i> Copy tất cả</button>
+                <button id="bulk-edit-download-btn" class="btn btn-success"><i class="fa-solid fa-file-zipper"></i> Tải file .ZIP các chương</button>
+                <button id="bulk-edit-save-btn" class="btn btn-primary"><i class="fa-solid fa-circle-check"></i> Lưu & Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Guide Modal -->
+    <div id="video-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-effect" style="height: auto; max-width: 600px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-circle-play"></i> Video hướng dẫn chia theo đoạn</h3>
+                <button id="close-video-btn" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 1.5rem; text-align: center;">
+                <div class="video-container-placeholder">
+                    <i class="fa-solid fa-circle-play video-play-icon"></i>
+                    <p style="margin-top: 1rem; color: var(--text-primary); font-weight: 600;">Xem hướng dẫn chi tiết cách chia theo đoạn:</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: left; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+                        1. <strong>Số từ định mức:</strong> Nhập số lượng từ mong muốn cho mỗi chương (ví dụ: 2000 từ).<br>
+                        2. <strong>Tiền tố & Số bắt đầu:</strong> Đặt tiêu đề mẫu (ví dụ: <em>Thế giới 1 - Chương </em>) và số thứ tự bắt đầu là <em>5</em>, hệ thống sẽ tự động sinh tiêu đề: <em>Thế giới 1 - Chương 5, Thế giới 1 - Chương 6...</em><br>
+                        3. <strong>Thuật toán:</strong> Hệ thống sẽ tự động ghép các đoạn văn của bạn cho đến khi đủ từ mới ngắt chương, tránh tình trạng câu chữ bị cắt nửa chừng.<br>
+                        4. <strong>Popup:</strong> Sau khi chia, popup chỉnh sửa hàng loạt sẽ xuất hiện để bạn chỉnh sửa nhanh nội dung hoặc tiêu đề của từng chương trước khi sao chép hoặc tải về.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="close-video-ok-btn" class="btn btn-primary btn-block">Đã hiểu</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
