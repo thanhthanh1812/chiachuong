@@ -34,8 +34,7 @@
                 </div>
             </div>
             <div class="header-badges">
-                <span class="badge badge-client"><i class="fa-solid fa-shield-halved"></i> Không cần Backend</span>
-                <span class="badge badge-limit"><i class="fa-solid fa-circle-exclamation"></i> Tối đa 10 chương</span>
+                <span class="badge badge-limit"><i class="fa-solid fa-circle-exclamation"></i> Giới hạn 10 chương khi chia đoạn</span>
             </div>
         </header>
 
@@ -68,7 +67,6 @@ Nội dung chương 6..."></textarea>
                         <button type="button" class="tab-btn" id="tab-paragraph-btn" data-tab="paragraph"><i class="fa-solid fa-paragraph"></i> Theo Đoạn & Số Từ</button>
                     </div>
 
-                    <!-- Config Split by Title (Tab Content 1) -->
                     <div class="config-box tab-content" id="config-title-content">
                         <h3><i class="fa-solid fa-sliders"></i> Cấu hình nhận diện tên chương</h3>
                         <div class="config-grid">
@@ -86,11 +84,6 @@ Nội dung chương 6..."></textarea>
                                 <label for="custom-regex">Regex tùy chỉnh:</label>
                                 <input type="text" id="custom-regex" value="^(Chương|CHƯƠNG|Quyển)\s+\d+.*$" placeholder="Regex nhận diện dòng tiêu đề">
                             </div>
-                            <div class="config-group">
-                                <label for="limit-chapters">Số chương giới hạn tối đa:</label>
-                                <input type="number" id="limit-chapters" value="10" min="1" max="10" readonly class="input-readonly">
-                                <small class="input-tip">Hệ thống chỉ hỗ trợ tách tối đa 10 chương.</small>
-                            </div>
                         </div>
                     </div>
 
@@ -103,7 +96,7 @@ Nội dung chương 6..."></textarea>
                         </div>
                         <div class="video-guide-area">
                             <button type="button" id="video-guide-btn" class="btn btn-secondary btn-block btn-sm">
-                                <i class="fa-solid fa-video"></i> Video hướng dẫn sử dụng nhanh
+                                <i class="fa-solid fa-circle-info"></i> Hướng dẫn sử dụng
                             </button>
                         </div>
                         <div class="config-grid">
@@ -216,16 +209,16 @@ Nội dung chương 6..."></textarea>
         </div>
     </div>
 
-    <!-- Video Guide Modal -->
+    <!-- Guide Modal -->
     <div id="video-modal" class="modal-overlay hidden">
         <div class="modal-content glass-effect" style="height: auto; max-width: 600px;">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-circle-play"></i> Video hướng dẫn chia theo đoạn</h3>
+                <h3><i class="fa-solid fa-book-open"></i> Hướng dẫn chia chương theo đoạn</h3>
                 <button id="close-video-btn" class="btn-close">&times;</button>
             </div>
             <div class="modal-body" style="padding: 1.5rem; text-align: center;">
                 <div class="video-container-placeholder">
-                    <i class="fa-solid fa-circle-play video-play-icon"></i>
+                    <i class="fa-solid fa-book-open video-play-icon" style="color: var(--accent-blue); filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));"></i>
                     <p style="margin-top: 1rem; color: var(--text-primary); font-weight: 600;">Xem hướng dẫn chi tiết cách chia theo đoạn:</p>
                     <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: left; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.7;">
                         1. <strong>Số từ định mức:</strong> Nhập số lượng từ mong muốn cho mỗi chương (ví dụ: 2000 từ).<br>
