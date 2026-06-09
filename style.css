@@ -1,37 +1,37 @@
 /* ----------------------------------------------------
    StorySplitter Premium Stylesheet
-   Design Language: Glassmorphism & Neon Dark Mode
+   Design Language: Glassmorphism & Light Mode Premium
    ---------------------------------------------------- */
 
 :root {
-    --bg-color: #080B11;
-    --panel-bg: rgba(15, 22, 36, 0.6);
-    --panel-border: rgba(255, 255, 255, 0.08);
-    --text-primary: #F3F4F6;
-    --text-secondary: #9CA3AF;
-    --text-muted: #6B7280;
+    --bg-color: #F8FAFC;
+    --panel-bg: rgba(255, 255, 255, 0.75);
+    --panel-border: rgba(15, 23, 42, 0.08);
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
     
-    /* Neon Colors */
-    --accent-blue: #3B82F6;
-    --accent-blue-rgb: 59, 130, 246;
-    --accent-purple: #A855F7;
-    --accent-purple-rgb: 168, 85, 247;
-    --accent-cyan: #06B6D4;
-    --accent-cyan-rgb: 6, 182, 212;
-    --accent-green: #10B981;
-    --accent-red: #EF4444;
+    /* Premium Soft Colors */
+    --accent-blue: #2563EB;
+    --accent-blue-rgb: 37, 99, 235;
+    --accent-purple: #7C3AED;
+    --accent-purple-rgb: 124, 58, 237;
+    --accent-cyan: #0891B2;
+    --accent-cyan-rgb: 8, 145, 178;
+    --accent-green: #059669;
+    --accent-red: #E11D48;
     
     /* Gradients */
     --grad-primary: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    --grad-glow: linear-gradient(135deg, rgba(var(--accent-blue-rgb), 0.15), rgba(var(--accent-purple-rgb), 0.15));
-    --grad-button: linear-gradient(135deg, #2563EB, #7C3AED);
+    --grad-glow: linear-gradient(135deg, rgba(var(--accent-blue-rgb), 0.05), rgba(var(--accent-purple-rgb), 0.05));
+    --grad-button: linear-gradient(135deg, #3B82F6, #8B5CF6);
     
     /* Font */
     --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     
-    /* Shadow */
-    --shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    --shadow-glow: 0 0 20px rgba(var(--accent-blue-rgb), 0.2);
+    /* Shadow (Deeper and softer shadows for light mode) */
+    --shadow-soft: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.03);
+    --shadow-glow: 0 4px 20px rgba(var(--accent-blue-rgb), 0.15);
 }
 
 /* Reset & Basic Styles */
@@ -54,7 +54,7 @@ body {
     line-height: 1.6;
 }
 
-/* Cosmic & Glowing Background Elements */
+/* Cosmic & Glowing Background Elements (Adapted for light mode) */
 .stars-bg {
     position: fixed;
     top: 0;
@@ -63,27 +63,25 @@ body {
     height: 100%;
     z-index: -3;
     background-image: 
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-    background-size: 550px 550px, 350px 350px, 250px 250px;
-    background-position: 0 0, 40px 60px, 130px 270px;
-    opacity: 0.15;
+        radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 20px 20px;
+    opacity: 0.8;
 }
 
 .glowing-orb {
     position: fixed;
     border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(120px);
     z-index: -2;
-    opacity: 0.45;
+    opacity: 0.15;
     animation: floatOrb 25s infinite alternate ease-in-out;
 }
 
 .orb-1 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(var(--accent-blue-rgb), 0.6) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(var(--accent-blue-rgb), 0.4) 0%, transparent 70%);
     top: -10%;
     left: -10%;
 }
@@ -91,7 +89,7 @@ body {
 .orb-2 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(var(--accent-purple-rgb), 0.5) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(var(--accent-purple-rgb), 0.35) 0%, transparent 70%);
     bottom: -15%;
     right: -10%;
     animation-delay: -5s;
@@ -137,8 +135,8 @@ body {
     gap: 1.5rem;
     padding: 1.5rem 2rem;
     border-radius: 20px;
-    background: rgba(15, 22, 36, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(15, 23, 42, 0.04);
 }
 
 .logo-area {
@@ -152,14 +150,14 @@ body {
     background: var(--grad-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(var(--accent-blue-rgb), 0.3));
+    filter: drop-shadow(0 2px 4px rgba(var(--accent-blue-rgb), 0.15));
 }
 
 .logo-area h1 {
     font-size: 1.75rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(to right, #FFFFFF, #E2E8F0);
+    background: linear-gradient(to right, #0F172A, #334155);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -189,15 +187,15 @@ body {
 }
 
 .badge-client {
-    background: rgba(6, 182, 212, 0.1);
+    background: rgba(8, 145, 178, 0.08);
     color: var(--accent-cyan);
-    border-color: rgba(6, 182, 212, 0.2);
+    border-color: rgba(8, 145, 178, 0.15);
 }
 
 .badge-limit {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(225, 29, 72, 0.08);
     color: var(--accent-red);
-    border-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(225, 29, 72, 0.15);
 }
 
 /* Workspace Grid Layout */
@@ -224,7 +222,7 @@ body {
 }
 
 .panel:hover {
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), 0 0 1px rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1), 0 0 1px rgba(15, 23, 42, 0.1);
 }
 
 .panel-header {
@@ -233,7 +231,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(15, 23, 42, 0.01);
 }
 
 .panel-header h2 {
@@ -254,10 +252,10 @@ body {
 .text-stats {
     font-size: 0.85rem;
     color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.04);
     padding: 0.25rem 0.75rem;
     border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(15, 23, 42, 0.04);
 }
 
 .panel-body {
@@ -282,13 +280,13 @@ body {
 
 .panel-body::-webkit-scrollbar-thumb,
 .chapters-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.1);
     border-radius: 3px;
 }
 
 .panel-body::-webkit-scrollbar-thumb:hover,
 .chapters-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(15, 23, 42, 0.25);
 }
 
 /* Textarea Layout */
@@ -303,8 +301,8 @@ textarea {
     width: 100%;
     height: 100%;
     resize: none;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     border-radius: 12px;
     padding: 1rem;
     font-family: var(--font-family);
@@ -316,17 +314,17 @@ textarea {
 
 textarea:focus {
     outline: none;
-    border-color: rgba(var(--accent-blue-rgb), 0.5);
-    box-shadow: 0 0 0 3px rgba(var(--accent-blue-rgb), 0.15);
-    background: rgba(0, 0, 0, 0.35);
+    border-color: rgba(var(--accent-blue-rgb), 0.4);
+    box-shadow: 0 0 0 3px rgba(var(--accent-blue-rgb), 0.08);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .btn-icon-only {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(15, 23, 42, 0.06);
     color: var(--text-secondary);
     border-radius: 8px;
     width: 36px;
@@ -339,16 +337,16 @@ textarea:focus {
 }
 
 .btn-icon-only:hover {
-    background: rgba(239, 68, 68, 0.15);
+    background: rgba(225, 29, 72, 0.1);
     color: var(--accent-red);
-    border-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(225, 29, 72, 0.15);
     transform: scale(1.05);
 }
 
 /* Config Box Styles */
 .config-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.01);
+    border: 1px solid rgba(15, 23, 42, 0.05);
     border-radius: 12px;
     padding: 1.25rem;
 }
@@ -401,8 +399,8 @@ textarea:focus {
 
 select, input[type="text"] {
     width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     color: var(--text-primary);
     border-radius: 8px;
     padding: 0.75rem 1rem;
@@ -414,18 +412,18 @@ select, input[type="text"] {
 
 select:focus, input[type="text"]:focus {
     outline: none;
-    border-color: rgba(var(--accent-purple-rgb), 0.5);
-    box-shadow: 0 0 0 3px rgba(var(--accent-purple-rgb), 0.15);
+    border-color: rgba(var(--accent-purple-rgb), 0.4);
+    box-shadow: 0 0 0 3px rgba(var(--accent-purple-rgb), 0.08);
 }
 
 select option {
-    background-color: #0E1320;
+    background-color: #FFFFFF;
     color: var(--text-primary);
 }
 
 .input-readonly {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border-color: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(15, 23, 42, 0.02) !important;
+    border-color: rgba(15, 23, 42, 0.04) !important;
     color: var(--accent-red) !important;
     font-weight: 700;
     text-align: center;
@@ -478,7 +476,7 @@ select option {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(var(--accent-purple-rgb), 0.4);
+    box-shadow: 0 8px 25px rgba(var(--accent-blue-rgb), 0.35);
 }
 
 .btn-primary:hover::before {
@@ -490,26 +488,26 @@ select option {
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(15, 23, 42, 0.06);
     color: var(--text-primary);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(15, 23, 42, 0.08);
+    border-color: rgba(15, 23, 42, 0.1);
     transform: translateY(-1px);
 }
 
 .btn-success {
-    background: rgba(16, 185, 129, 0.15);
-    border: 1px solid rgba(16, 185, 129, 0.25);
-    color: #34D399;
+    background: rgba(5, 150, 105, 0.08);
+    border: 1px solid rgba(5, 150, 105, 0.18);
+    color: #047857;
 }
 
 .btn-success:hover {
-    background: rgba(16, 185, 129, 0.25);
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    background: rgba(5, 150, 105, 0.15);
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
     transform: translateY(-1px);
 }
 
@@ -569,11 +567,11 @@ select option {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: rgba(239, 68, 68, 0.12);
-    border: 1px solid rgba(239, 68, 68, 0.25);
+    background: rgba(225, 29, 72, 0.06);
+    border: 1px solid rgba(225, 29, 72, 0.15);
     border-radius: 10px;
     padding: 0.75rem 1rem;
-    color: #F87171;
+    color: #BE123C;
     font-size: 0.85rem;
     margin-bottom: 1rem;
     animation: shakeWarning 0.4s ease;
@@ -598,8 +596,8 @@ select option {
 
 /* Chapter Card (Glass Design) */
 .chapter-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(15, 23, 42, 0.05);
     border-radius: 12px;
     padding: 1rem;
     display: flex;
@@ -623,8 +621,9 @@ select option {
 }
 
 .chapter-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(var(--accent-blue-rgb), 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(var(--accent-blue-rgb), 0.15);
+    box-shadow: var(--shadow-soft);
     transform: translateX(4px);
 }
 
@@ -633,7 +632,7 @@ select option {
     flex-direction: column;
     gap: 0.25rem;
     flex: 1;
-    min-width: 0; /* Cho phép text truncation */
+    min-width: 0;
 }
 
 .chapter-title {
@@ -654,7 +653,7 @@ select option {
 }
 
 .chapter-index {
-    background: rgba(var(--accent-blue-rgb), 0.1);
+    background: rgba(var(--accent-blue-rgb), 0.08);
     color: var(--accent-blue);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
@@ -668,8 +667,8 @@ select option {
 }
 
 .chapter-actions .btn-action {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.04);
     color: var(--text-secondary);
     width: 32px;
     height: 32px;
@@ -682,16 +681,16 @@ select option {
 }
 
 .chapter-actions .btn-action:hover {
-    background: rgba(var(--accent-blue-rgb), 0.1);
+    background: rgba(var(--accent-blue-rgb), 0.08);
     color: var(--accent-blue);
-    border-color: rgba(var(--accent-blue-rgb), 0.2);
+    border-color: rgba(var(--accent-blue-rgb), 0.15);
     transform: scale(1.05);
 }
 
 .chapter-actions .btn-action.btn-copy-chap:hover {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(5, 150, 105, 0.08);
     color: var(--accent-green);
-    border-color: rgba(16, 185, 129, 0.2);
+    border-color: rgba(5, 150, 105, 0.15);
 }
 
 /* Bulk Actions Layout */
@@ -709,7 +708,7 @@ select option {
     font-size: 0.8rem;
     color: var(--text-muted);
     padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(15, 23, 42, 0.02);
 }
 
 /* Modal Styling */
@@ -719,7 +718,7 @@ select option {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(15, 23, 42, 0.4);
     backdrop-filter: blur(8px);
     z-index: 100;
     display: flex;
@@ -790,7 +789,7 @@ select option {
     padding: 1.5rem;
     flex: 1;
     overflow-y: auto;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(15, 23, 42, 0.02);
 }
 
 .modal-body pre {
@@ -815,17 +814,17 @@ select option {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: rgba(15, 23, 42, 0.9);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-    color: #34D399;
+    background: #FFFFFF;
+    border: 1px solid rgba(5, 150, 105, 0.2);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 16px -6px rgba(15, 23, 42, 0.05);
+    color: var(--accent-green);
     padding: 1rem 1.5rem;
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 0.75rem;
     z-index: 200;
-    font-weight: 550;
+    font-weight: 600;
     font-size: 0.9rem;
     transform: translateY(100px);
     opacity: 0;
@@ -849,10 +848,10 @@ select option {
 .tabs-navigation {
     display: flex;
     gap: 0.5rem;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(15, 23, 42, 0.03);
     padding: 0.35rem;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(15, 23, 42, 0.05);
     margin-bottom: 0.5rem;
 }
 
@@ -876,26 +875,26 @@ select option {
 
 .tab-btn:hover {
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(15, 23, 42, 0.03);
 }
 
 .tab-btn.active {
     background: var(--grad-primary);
     color: white;
-    box-shadow: 0 4px 12px rgba(var(--accent-blue-rgb), 0.25);
+    box-shadow: 0 4px 12px rgba(var(--accent-blue-rgb), 0.2);
 }
 
 /* Info Note Alert styling */
 .info-note {
     display: flex;
     gap: 0.75rem;
-    background: rgba(59, 130, 246, 0.08);
-    border: 1px solid rgba(59, 130, 246, 0.15);
+    background: rgba(37, 99, 235, 0.05);
+    border: 1px solid rgba(37, 99, 235, 0.12);
     padding: 0.85rem 1rem;
     border-radius: 12px;
     margin-bottom: 1rem;
     font-size: 0.825rem;
-    color: #93C5FD;
+    color: #1E40AF;
     line-height: 1.5;
 }
 
@@ -917,8 +916,8 @@ select option {
 /* Video Placeholder */
 .video-container-placeholder {
     padding: 2.5rem 1.5rem;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px dashed rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.01);
+    border: 1px dashed rgba(15, 23, 42, 0.15);
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -927,8 +926,6 @@ select option {
 
 .video-play-icon {
     font-size: 3.5rem;
-    color: var(--accent-red);
-    filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.4));
     margin-bottom: 1.25rem;
     animation: pulsePlay 2s infinite;
 }
@@ -968,8 +965,8 @@ select option {
 }
 
 .bulk-edit-item {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(15, 23, 42, 0.06);
     border-radius: 16px;
     padding: 1.25rem;
     display: flex;
@@ -979,9 +976,9 @@ select option {
 }
 
 .bulk-edit-item:focus-within {
-    border-color: rgba(var(--accent-purple-rgb), 0.3);
-    box-shadow: 0 0 15px rgba(var(--accent-purple-rgb), 0.1);
-    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(var(--accent-purple-rgb), 0.25);
+    box-shadow: 0 4px 15px rgba(var(--accent-purple-rgb), 0.05);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .bulk-edit-item-header {
@@ -995,8 +992,8 @@ select option {
     flex: 1;
     font-weight: 700;
     font-size: 0.95rem;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.08);
     color: var(--text-primary);
     padding: 0.5rem 0.75rem;
     border-radius: 8px;
@@ -1015,7 +1012,7 @@ select option {
 }
 
 .bulk-edit-meta .char-badge {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.04);
     color: var(--text-secondary);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
@@ -1027,8 +1024,8 @@ select option {
     width: 100%;
     height: 180px;
     resize: none;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(15, 23, 42, 0.08);
     color: var(--text-primary);
     border-radius: 10px;
     padding: 0.75rem 1rem;
@@ -1040,8 +1037,8 @@ select option {
 
 .bulk-edit-textarea:focus {
     outline: none;
-    border-color: rgba(var(--accent-purple-rgb), 0.4);
-    background: rgba(0, 0, 0, 0.35);
+    border-color: rgba(var(--accent-purple-rgb), 0.3);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .bulk-edit-actions {
@@ -1051,8 +1048,8 @@ select option {
 }
 
 .bulk-edit-actions .btn-action {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.04);
     color: var(--text-secondary);
     width: 32px;
     height: 32px;
@@ -1065,22 +1062,22 @@ select option {
 }
 
 .bulk-edit-actions .btn-action:hover {
-    background: rgba(var(--accent-blue-rgb), 0.1);
+    background: rgba(var(--accent-blue-rgb), 0.08);
     color: var(--accent-blue);
-    border-color: rgba(var(--accent-blue-rgb), 0.2);
+    border-color: rgba(var(--accent-blue-rgb), 0.15);
 }
 
 .bulk-edit-actions .btn-action.btn-copy-chap:hover {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(5, 150, 105, 0.08);
     color: var(--accent-green);
-    border-color: rgba(16, 185, 129, 0.2);
+    border-color: rgba(5, 150, 105, 0.15);
 }
 
-/* Number Inputs Styling */
+/* Number Inputs Custom Styling */
 input[type="number"] {
     width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     color: var(--text-primary);
     border-radius: 8px;
     padding: 0.75rem 1rem;
@@ -1092,7 +1089,7 @@ input[type="number"] {
 input[type="number"]:focus {
     outline: none;
     border-color: rgba(var(--accent-purple-rgb), 0.5);
-    box-shadow: 0 0 0 3px rgba(var(--accent-purple-rgb), 0.15);
+    box-shadow: 0 0 0 3px rgba(var(--accent-purple-rgb), 0.08);
 }
 
 /* Hide spin buttons for Chrome, Safari, Edge, Opera */
@@ -1105,4 +1102,22 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Hide spin buttons for Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+/* Custom styles for specific numeric inputs */
+#words-per-chapter, 
+#chapter-start-num {
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--accent-cyan);
+    border-color: rgba(8, 145, 178, 0.3);
+    background: rgba(8, 145, 178, 0.04);
+}
+
+#words-per-chapter:focus, 
+#chapter-start-num:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(8, 145, 178, 0.2);
+    background: rgba(255, 255, 255, 0.95);
 }

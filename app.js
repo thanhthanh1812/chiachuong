@@ -309,9 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Limit checking
+        // Limit checking (only apply the 10-chapter limit for paragraph-based splitting)
         const totalDetected = processedChapters.length;
-        if (totalDetected > 10) {
+        if (activeTab === 'paragraph' && totalDetected > 10) {
             processedChapters = processedChapters.slice(0, 10);
             warningMessage.textContent = `Đã tìm thấy ${totalDetected} chương. Hệ thống chỉ lấy tối đa 10 chương đầu tiên.`;
             warningBox.classList.remove('hidden');
