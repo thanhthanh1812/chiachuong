@@ -214,8 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper: Generate chapter title dynamically based on prefix and start number
     const generateChapterTitle = (prefix, num) => {
         const trimmedPrefix = prefix.trim();
-        const hasChapterWord = /chương|chuong/i.test(trimmedPrefix);
         
+        // If prefix is empty, just return "Chương [num]"
+        if (trimmedPrefix === '') {
+            return `Chương ${num}`;
+        }
+        
+        const hasChapterWord = /chương|chuong/i.test(trimmedPrefix);
         if (hasChapterWord) {
             return `${prefix}${num}`;
         } else {
