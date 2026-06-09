@@ -211,6 +211,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Helper: Generate chapter title dynamically based on prefix and start number
+    const generateChapterTitle = (prefix, num) => {
+        const trimmedPrefix = prefix.trim();
+        const hasChapterWord = /chương|chuong/i.test(trimmedPrefix);
+        
+        if (hasChapterWord) {
+            return `${prefix}${num}`;
+        } else {
+            return `${prefix} - Chương ${num}`;
+        }
+    };
+
     // Algorithm 2: Split chapters by Word count boundary at paragraph endings
     const splitByParagraph = (rawText) => {
         const lines = rawText.split(/\r?\n/);
@@ -243,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     i++;
                 }
                 
-                const title = `${chapterPrefix}${chapterStartNum + currentChapterIndex}`;
+                const title = generateChapterTitle(chapterPrefix, chapterStartNum + currentChapterIndex);
                 const content = currentChapterLines.join('\n').trim();
                 
                 chapters.push({
@@ -268,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentChapterLines.length > 0 && chapters.length < 10) {
             const content = currentChapterLines.join('\n').trim();
             if (content !== '') {
-                const title = `${chapterPrefix}${chapterStartNum + currentChapterIndex}`;
+                const title = generateChapterTitle(chapterPrefix, chapterStartNum + currentChapterIndex);
                 const words = content.split(/\s+/).length;
                 chapters.push({
                     title: title,
