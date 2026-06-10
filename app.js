@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bulkEditSaveBtn = document.getElementById('bulk-edit-save-btn');
 
     // State Variables
-    let activeTab = 'title'; // 'title' or 'paragraph'
+    let activeTab = 'paragraph'; // 'title' or 'paragraph'
     let processedChapters = [];
     let currentPreviewIndex = null;
 
