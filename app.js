@@ -355,8 +355,12 @@ document.addEventListener('DOMContentLoaded', () => {
             warningBox.classList.add('hidden');
         }
 
+        // Determine active tab dynamically from DOM to prevent state sync issues
+        const activeTabEl = document.querySelector('.tab-btn.active');
+        const currentActiveTab = activeTabEl ? activeTabEl.getAttribute('data-tab') : activeTab;
+
         let chapters = [];
-        if (activeTab === 'title') {
+        if (currentActiveTab === 'title') {
             chapters = splitByTitle(processedText);
         } else {
             chapters = splitByParagraph(processedText);
@@ -757,6 +761,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Start services
+    switchTab('paragraph');
     initPageViews();
     fetchTotalChapters();
     simulateOnlineUsers();
