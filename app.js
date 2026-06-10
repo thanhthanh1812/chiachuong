@@ -390,7 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
         bulkActions.classList.remove('hidden');
 
         showToast(`Đã chia thành công ${processedChapters.length} chương!`, 'fa-circle-check');
-        incrementSplitChapters();
 
         // Automatically trigger bulk edit popup for edit & copy convenience
         openBulkEditModal();
@@ -656,16 +655,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bulkEditDownloadBtn.addEventListener('click', generateAndDownloadZip);
 
     // ----------------------------------------------------
-    // Counter API & Online Users Logic
-    // Namespace: chiachuong_thanhthanh
+    // Online Users Simulation Logic
     // ----------------------------------------------------
-    const API_NAMESPACE = 'chiachuong_thanhthanh';
-    const VIEWS_KEY = 'views';
-    const CHAPTERS_KEY = 'split_chapters';
-
     const onlineCountEl = document.getElementById('online-count');
-    const viewsCountEl = document.getElementById('views-count');
-    const processedCountEl = document.getElementById('processed-count');
 
     // Update element content with animation
     const animateCounterUpdate = (element, newValue) => {
@@ -674,77 +666,6 @@ document.addEventListener('DOMContentLoaded', () => {
         element.offsetWidth; // Reflow to restart animation
         element.textContent = newValue;
         element.classList.add('counter-update-flash');
-    };
-
-    // Initialize and increment Page Views
-    const initPageViews = async () => {
-        try {
-            const response = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${VIEWS_KEY}/up`);
-            if (response.ok) {
-                const data = await response.json();
-                animateCounterUpdate(viewsCountEl, data.count.toLocaleString('vi-VN'));
-            } else {
-                // Fallback to local storage for view emulation
-                let localViews = parseInt(localStorage.getItem('local_views') || '156');
-                localViews++;
-                localStorage.setItem('local_views', localViews);
-                animateCounterUpdate(viewsCountEl, localViews.toLocaleString('vi-VN'));
-            }
-        } catch (error) {
-            console.error('Error updating views count:', error);
-            // Fallback
-            let localViews = parseInt(localStorage.getItem('local_views') || '156');
-            localViews++;
-            localStorage.setItem('local_views', localViews);
-            animateCounterUpdate(viewsCountEl, localViews.toLocaleString('vi-VN'));
-        }
-    };
-
-    // Fetch Total Split Chapters
-    const fetchTotalChapters = async () => {
-        try {
-            const response = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${CHAPTERS_KEY}`);
-            if (response.ok) {
-                const data = await response.json();
-                animateCounterUpdate(processedCountEl, data.count.toLocaleString('vi-VN'));
-            } else {
-                // Initial check, try creating it with up
-                const initRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${CHAPTERS_KEY}/up`);
-                if (initRes.ok) {
-                    const data = await initRes.json();
-                    animateCounterUpdate(processedCountEl, data.count.toLocaleString('vi-VN'));
-                } else {
-                    let localChaps = parseInt(localStorage.getItem('local_chapters') || '64');
-                    animateCounterUpdate(processedCountEl, localChaps.toLocaleString('vi-VN'));
-                }
-            }
-        } catch (error) {
-            console.error('Error fetching chapters count:', error);
-            let localChaps = parseInt(localStorage.getItem('local_chapters') || '64');
-            animateCounterUpdate(processedCountEl, localChaps.toLocaleString('vi-VN'));
-        }
-    };
-
-    // Global Increment for Split Chapters
-    window.incrementSplitChapters = async () => {
-        try {
-            const response = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${CHAPTERS_KEY}/up`);
-            if (response.ok) {
-                const data = await response.json();
-                animateCounterUpdate(processedCountEl, data.count.toLocaleString('vi-VN'));
-            } else {
-                let localChaps = parseInt(localStorage.getItem('local_chapters') || '64');
-                localChaps++;
-                localStorage.setItem('local_chapters', localChaps);
-                animateCounterUpdate(processedCountEl, localChaps.toLocaleString('vi-VN'));
-            }
-        } catch (error) {
-            console.error('Error incrementing chapters count:', error);
-            let localChaps = parseInt(localStorage.getItem('local_chapters') || '64');
-            localChaps++;
-            localStorage.setItem('local_chapters', localChaps);
-            animateCounterUpdate(processedCountEl, localChaps.toLocaleString('vi-VN'));
-        }
     };
 
     // Simulate Online Users
@@ -762,7 +683,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start services
     switchTab('paragraph');
-    initPageViews();
-    fetchTotalChapters();
     simulateOnlineUsers();
 });
