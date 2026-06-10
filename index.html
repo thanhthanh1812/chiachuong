@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StorySplitter - Công cụ chia chương truyện trực tuyến chuyên nghiệp</title>
-    <meta name="description" content="Công cụ trực tuyến giúp chia nhỏ văn bản truyện thô thành các chương riêng biệt một cách nhanh chóng, hỗ trợ tải về file ZIP và sao chép nhanh chóng. Chạy hoàn toàn trên trình duyệt của bạn.">
+    <meta name="description"
+        content="Công cụ trực tuyến giúp chia nhỏ văn bản truyện thô thành các chương riêng biệt một cách nhanh chóng, hỗ trợ tải về file ZIP và sao chép nhanh chóng. Chạy hoàn toàn trên trình duyệt của bạn.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Style Sheet -->
@@ -18,6 +21,7 @@
     <!-- Main Script -->
     <script src="app.js" defer></script>
 </head>
+
 <body>
     <div class="stars-bg"></div>
     <div class="glowing-orb orb-1"></div>
@@ -58,13 +62,16 @@ Nội dung chương 5...
 Chương 6: Trời nắng
 
 Nội dung chương 6..."></textarea>
-                        <button id="clear-btn" class="btn-icon-only" title="Xóa nội dung"><i class="fa-solid fa-trash-can"></i></button>
+                        <button id="clear-btn" class="btn-icon-only" title="Xóa nội dung"><i
+                                class="fa-solid fa-trash-can"></i></button>
                     </div>
 
                     <!-- Tabs Navigation -->
                     <div class="tabs-navigation">
-                        <button type="button" class="tab-btn active" id="tab-title-btn" data-tab="title"><i class="fa-solid fa-heading"></i> Theo Tên Chương</button>
-                        <button type="button" class="tab-btn" id="tab-paragraph-btn" data-tab="paragraph"><i class="fa-solid fa-paragraph"></i> Theo Đoạn & Số Từ</button>
+                        <button type="button" class="tab-btn active" id="tab-title-btn" data-tab="title"><i
+                                class="fa-solid fa-heading"></i> Theo Tên Chương</button>
+                        <button type="button" class="tab-btn" id="tab-paragraph-btn" data-tab="paragraph"><i
+                                class="fa-solid fa-paragraph"></i> Theo Đoạn & Số Từ</button>
                     </div>
 
                     <div class="config-box tab-content" id="config-title-content">
@@ -82,7 +89,8 @@ Nội dung chương 6..."></textarea>
                             </div>
                             <div class="config-group hidden" id="custom-regex-group">
                                 <label for="custom-regex">Regex tùy chỉnh:</label>
-                                <input type="text" id="custom-regex" value="^(Chương|CHƯƠNG|Quyển)\s+\d+.*$" placeholder="Regex nhận diện dòng tiêu đề">
+                                <input type="text" id="custom-regex" value="^(Chương|CHƯƠNG|Quyển)\s+\d+.*$"
+                                    placeholder="Regex nhận diện dòng tiêu đề">
                             </div>
                         </div>
                     </div>
@@ -92,7 +100,9 @@ Nội dung chương 6..."></textarea>
                         <h3><i class="fa-solid fa-sliders"></i> Cấu hình tự động chia theo đoạn</h3>
                         <div class="info-note">
                             <i class="fa-solid fa-circle-info"></i>
-                            <p>Tính năng này tự động chia truyện thành các chương nhỏ bằng cách gom các đoạn văn để không bị cắt vụn chữ. <strong>Hãy xuống dòng thường xuyên để số từ các chương đồng đều hơn.</strong></p>
+                            <p>Tính năng này tự động chia truyện thành các chương nhỏ bằng cách gom các đoạn văn để
+                                không bị cắt vụn chữ. <strong>Hãy xuống dòng thường xuyên để số từ các chương đồng đều
+                                    hơn.</strong></p>
                         </div>
                         <div class="video-guide-area">
                             <button type="button" id="video-guide-btn" class="btn btn-secondary btn-block btn-sm">
@@ -106,7 +116,8 @@ Nội dung chương 6..."></textarea>
                             </div>
                             <div class="config-group">
                                 <label for="chapter-prefix">Tiền tố chương (Ví dụ: Thế giới 1):</label>
-                                <input type="text" id="chapter-prefix" value="Thế giới 1 - Chương " placeholder="Ví dụ: Thế giới 1 - Chương ">
+                                <input type="text" id="chapter-prefix" value="Thế giới 1 - Chương "
+                                    placeholder="Ví dụ: Thế giới 1 - Chương ">
                             </div>
                             <div class="config-group">
                                 <label for="chapter-start-num">Số thứ tự bắt đầu:</label>
@@ -128,12 +139,13 @@ Nội dung chương 6..."></textarea>
                     <h2><i class="fa-solid fa-square-poll-horizontal icon-purple"></i> Kết quả đã phân tách</h2>
                     <span id="detected-stats" class="text-stats">0 chương được tìm thấy</span>
                 </div>
-                
+
                 <div class="panel-body flex-column-layout">
                     <!-- Warning message if exceeding limits or no chapters -->
                     <div id="warning-box" class="warning-box hidden">
                         <i class="fa-solid fa-triangle-exclamation"></i>
-                        <span id="warning-message">Đã tìm thấy nhiều hơn 10 chương. Hệ thống chỉ lấy 10 chương đầu tiên.</span>
+                        <span id="warning-message">Đã tìm thấy nhiều hơn 10 chương. Hệ thống chỉ lấy 10 chương đầu
+                            tiên.</span>
                     </div>
 
                     <!-- Placeholder when empty -->
@@ -142,7 +154,8 @@ Nội dung chương 6..."></textarea>
                             <i class="fa-solid fa-bezier-curve"></i>
                         </div>
                         <h3>Chưa có chương nào được chia</h3>
-                        <p>Hãy dán văn bản truyện ở ô bên trái và bấm nút "Bắt đầu tách chương" để xem kết quả tại đây.</p>
+                        <p>Hãy dán văn bản truyện ở ô bên trái và bấm nút "Bắt đầu tách chương" để xem kết quả tại đây.
+                        </p>
                     </div>
 
                     <!-- Chapters Output Area -->
@@ -181,7 +194,8 @@ Nội dung chương 6..."></textarea>
             </div>
             <div class="modal-footer">
                 <button id="modal-copy-btn" class="btn btn-secondary"><i class="fa-solid fa-copy"></i> Sao chép</button>
-                <button id="modal-download-btn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải .txt</button>
+                <button id="modal-download-btn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải
+                    .txt</button>
             </div>
         </div>
     </div>
@@ -202,9 +216,12 @@ Nội dung chương 6..."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="bulk-edit-copy-btn" class="btn btn-secondary"><i class="fa-solid fa-copy"></i> Copy tất cả</button>
-                <button id="bulk-edit-download-btn" class="btn btn-success"><i class="fa-solid fa-file-zipper"></i> Tải file .ZIP các chương</button>
-                <button id="bulk-edit-save-btn" class="btn btn-primary"><i class="fa-solid fa-circle-check"></i> Lưu & Đóng</button>
+                <button id="bulk-edit-copy-btn" class="btn btn-secondary"><i class="fa-solid fa-copy"></i> Copy tất
+                    cả</button>
+                <button id="bulk-edit-download-btn" class="btn btn-success"><i class="fa-solid fa-file-zipper"></i> Tải
+                    file .ZIP các chương</button>
+                <button id="bulk-edit-save-btn" class="btn btn-primary"><i class="fa-solid fa-circle-check"></i> Lưu &
+                    Đóng</button>
             </div>
         </div>
     </div>
@@ -218,14 +235,24 @@ Nội dung chương 6..."></textarea>
             </div>
             <div class="modal-body" style="padding: 1.5rem; text-align: center;">
                 <div class="video-container-placeholder">
-                    <i class="fa-solid fa-book-open video-play-icon" style="color: var(--accent-blue); filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));"></i>
-                    <p style="margin-top: 1rem; color: var(--text-primary); font-weight: 600;">Xem hướng dẫn chi tiết cách chia theo đoạn:</p>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: left; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.7;">
-                        1. <strong>Số từ định mức:</strong> Nhập số lượng từ mong muốn cho mỗi chương (ví dụ: 2000 từ).<br>
-                        2. <strong>Tiền tố & Số bắt đầu:</strong> Đặt tiêu đề mẫu (ví dụ: <em>Thế giới 1 </em>) và số thứ tự bắt đầu là <em>5</em>, hệ thống sẽ tự động sinh tiêu đề: <em>Thế giới 1 - Chương 5, Thế giới 1 - Chương 6...</em> (nếu không điền tiền tố sẽ sinh mặc định <em>Chương 5, Chương 6...</em>).<br>
-                        3. <strong>Thuật toán:</strong> Hệ thống sẽ tự động ghép các đoạn văn của bạn cho đến khi đủ từ mới ngắt chương, tránh tình trạng câu chữ bị cắt nửa chừng.<br>
-                        4. <strong>Popup:</strong> Sau khi chia, popup chỉnh sửa hàng loạt sẽ xuất hiện để bạn chỉnh sửa nhanh nội dung hoặc tiêu đề của từng chương trước khi sao chép hoặc tải về.<br>
-                        5. <strong>Giới hạn xử lý:</strong> Hệ thống hỗ trợ tối đa <strong>50.000 từ</strong> đầu vào để đảm bảo mượt mà. Văn bản dài hơn sẽ tự động được cắt ngắn lại.
+                    <i class="fa-solid fa-book-open video-play-icon"
+                        style="color: var(--accent-blue); filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));"></i>
+                    <p style="margin-top: 1rem; color: var(--text-primary); font-weight: 600;">Xem hướng dẫn chi tiết
+                        cách chia theo đoạn:</p>
+                    <p
+                        style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: left; max-width: 450px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+                        1. <strong>Số từ định mức:</strong> Nhập số lượng từ mong muốn cho mỗi chương (ví dụ: 2000
+                        từ).<br>
+                        2. <strong>Tiền tố & Số bắt đầu:</strong> Đặt tiêu đề mẫu (ví dụ: <em>Thế giới 1 </em>) và số
+                        thứ tự bắt đầu là <em>5</em>, hệ thống sẽ tự động sinh tiêu đề: <em>Thế giới 1 - Chương 5, Thế
+                            giới 1 - Chương 6...</em> (nếu không điền tiền tố sẽ sinh mặc định <em>Chương 5, Chương
+                            6...</em>).<br>
+                        3. <strong>Thuật toán:</strong> Hệ thống sẽ tự động ghép các đoạn văn của bạn cho đến khi đủ từ
+                        mới ngắt chương, tránh tình trạng câu chữ bị cắt nửa chừng.<br>
+                        4. <strong>Popup:</strong> Sau khi chia, popup chỉnh sửa hàng loạt sẽ xuất hiện để bạn chỉnh sửa
+                        nhanh nội dung hoặc tiêu đề của từng chương trước khi sao chép hoặc tải về.<br>
+                        5. <strong>Giới hạn xử lý:</strong> Hệ thống hỗ trợ tối đa <strong>50.000 từ</strong> đầu vào để
+                        đảm bảo mượt mà. Văn bản dài hơn sẽ tự động được cắt ngắn lại.
                     </p>
                 </div>
             </div>
@@ -235,4 +262,5 @@ Nội dung chương 6..."></textarea>
         </div>
     </div>
 </body>
+
 </html>
