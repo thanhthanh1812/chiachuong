@@ -439,10 +439,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Copy single chapter logic (Format: title + double newline + content)
+    // Copy single chapter logic (only chapter content)
     const copySingleChapter = (index) => {
         const chapter = processedChapters[index];
-        const formattedText = `${chapter.title}\n\n${chapter.content}`;
+        const formattedText = chapter.content;
         
         navigator.clipboard.writeText(formattedText).then(() => {
             showToast(`Đã copy nội dung: ${chapter.title.substring(0, 15)}...`, 'fa-copy');
@@ -452,10 +452,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Download single chapter as txt file
+    // Download single chapter as txt file (only chapter content)
     const downloadSingleChapter = (index) => {
         const chapter = processedChapters[index];
-        const formattedText = `${chapter.title}\n\n${chapter.content}`;
+        const formattedText = chapter.content;
         const blob = new Blob([formattedText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         
@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const zip = new JSZip();
         processedChapters.forEach((chapter, index) => {
-            const formattedText = `${chapter.title}\n\n${chapter.content}`;
+            const formattedText = chapter.content;
             const safeName = `${index + 1}_${chapter.title.replace(/[\\/:*?"<>|]/g, '_')}`;
             zip.file(`${safeName}.txt`, formattedText);
         });
@@ -626,11 +626,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Helper: Execute Copy all chapters combined text
+    // Helper: Execute Copy all chapters combined text (only chapter content)
     const copyAllChaptersText = () => {
         if (processedChapters.length === 0) return;
         
-        const bulkText = processedChapters.map(ch => `${ch.title}\n\n${ch.content}`).join('\n\n\n=== PHÂN CHƯƠNG ===\n\n\n');
+        const bulkText = processedChapters.map(ch => ch.content).join('\n\n\n=== PHÂN CHƯƠNG ===\n\n\n');
         
         navigator.clipboard.writeText(bulkText).then(() => {
             showToast('Đã copy toàn bộ các chương đã chia!', 'fa-copy');
