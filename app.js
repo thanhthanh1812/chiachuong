@@ -344,16 +344,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Apply 50,000 words limit
-        const limitResult = limitWords(rawText, 50000);
-        const processedText = limitResult.text;
-
-        if (limitResult.isCut) {
-            warningMessage.textContent = `Văn bản nhập vào quá dài (${limitResult.totalWords.toLocaleString('vi-VN')} từ). Hệ thống tự động cắt ngắn và chỉ xử lý 50.000 từ đầu tiên để bảo vệ hiệu năng.`;
-            warningBox.classList.remove('hidden');
-        } else {
-            warningBox.classList.add('hidden');
-        }
+        // Bỏ giới hạn từ (No word limit applied)
+        const processedText = rawText;
+        warningBox.classList.add('hidden');
 
         // Determine active tab dynamically from DOM to prevent state sync issues
         const activeTabEl = document.querySelector('.tab-btn.active');
@@ -683,5 +676,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start services
     switchTab('paragraph');
-    simulateOnlineUsers();
+    // simulateOnlineUsers(); // Hidden online counter
 });
